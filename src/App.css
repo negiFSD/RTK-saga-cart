@@ -1,0 +1,162 @@
+*{
+  margin: 0;
+  padding:0;
+  box-sizing: border-box;
+  /* text-align:  center; */
+  /* background: #EBF0F1; */
+  font-family:   'Lucida Sans', Arial, sans-serif;
+  /* font-size: large;
+  font-weight: 400;
+  color:#2d3636 */
+}
+
+body{
+  background: #EBF0F1;
+}
+.App{
+  background: #EBF0F1;
+  
+}
+
+ .main-container{ 
+  background: #EBF0F1; 
+  /* height: 100vh;  */
+  text-align: center;
+} 
+.firstcart-container{
+  /* margin-top: 10px; */
+display: flex;
+justify-content: space-around;
+
+/* flex-direction: column; */
+}
+
+.f-cart-items{
+  margin-top: 20px;
+  width: 75%;
+  border-right: #505e5e 2px solid;
+  
+}
+
+.f-cart-calculation{
+  margin-top: 20px;
+  width: 40%;
+}
+.f-titles{
+  font-weight: 500;
+  font-size: xx-large;
+  color:#5e5d5c;
+  margin-bottom: 40px;
+}
+.f-button{
+  background-color: #E5E9EA;
+  height: 40px;
+  width: 60%;
+  border: none;
+  margin-top: 20px;
+  border-radius: 20px;
+  font-size: larger;
+  color:#302f2f
+}
+
+.f-button:hover{
+  background-color: black;
+  color: white;
+  font-size: larger;
+}
+.f-cart-summary{
+  background-color: #E5E9EA;
+  color:#242424;
+  height: 40px;
+  margin-top: 10px;
+  margin: auto;
+  align-items: center;
+}
+
+
+
+.s-container{
+font-size: 15px;
+display:flex;
+/* border: solid 1px #bcc0c2; */
+margin: 5px;
+border-radius: 10px;
+height: 15vh;
+justify-content: space-around;
+align-items: center;
+background-color: #E5E9EA;
+width: 80%;
+margin: auto;
+margin-top: 15px;
+color:#242424
+
+}
+
+
+.s-container img{
+  height: 80px;
+  width: 80px ;
+  border-radius: 40px;
+}
+
+.s-qty{
+display: flex;
+flex-direction: row;
+}
+.s-plus:hover, .s-minus:hover{
+  color:black
+}
+
+.s-cancel, .s-plus, .s-minus{
+  color:#868483
+}
+.s-cancel:hover{
+  color: rgb(211, 55, 55);
+}
+.s-values{
+  width: 80px;
+}
+
+
+
+
+
+
+/* .App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+} */
