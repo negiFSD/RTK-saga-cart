@@ -48,6 +48,12 @@ const cartSlice = createSlice({
       cartItem.total = cartItem.qty * cartItem.price;
     },
 
+    //
+    
+    
+
+
+
     //-------------local actions--------------
     clearCart: (state) => {
       state.cart = [];
