@@ -2,9 +2,11 @@ import axios from "axios";
 import { takeLatest, put, call } from "redux-saga/effects";
 import {
   decreaseItem,
+  increaseItem,
   removeItem,
   setDecreaseItem,
   setFetchData,
+  setIncreaseItem,
   setRemoveItem,
 } from "../cartSlice";
 
@@ -56,18 +58,39 @@ function* handleDecreaseItem(action) {
       const res = await axios.patch(
         `http://localhost:3004/cart/${action.payload.id}`,
         payload
-      );
-      return res.data;
-    }
-  };
-  try {
-    yield put(setDecreaseItem(action.payload.id));
-    yield call(decreaseFunc);
+        );
+        return res.data;
+      }
+    };
+    try {
+      yield put(setDecreaseItem(action.payload.id));
+      yield call(decreaseFunc);
   } catch (error) {
     console.log("something went wrong while decreasing item", error);
   }
 }
 
+// ------------------------Increasing items -------------------------------------
+function* handleIncreaseItem(action){
+  const increaseFunc = async () => {
+
+    console.log(action.payload.qty)
+    const payload = { qty: action.payload.qty +1};
+    const res = await axios.patch(
+      `http://localhost:3004/cart/${action.payload.id}`,
+      payload
+      );
+    return res.data;
+  };
+  try {
+    const data = yield call(increaseFunc);
+    console.log(data)
+    yield put(setIncreaseItem(data));
+
+  } catch (error) {
+    console.log("something went wrong while fetching data", error.message);
+  }
+}
 
 //-----------------------------saga watcher function-------------------------------
 
@@ -75,6 +98,7 @@ function* watcherSaga() {
   yield takeLatest("cart/fetchData", handleFetchData);
   yield takeLatest(removeItem, handleRemoveData);
   yield takeLatest(decreaseItem, handleDecreaseItem);
+  yield takeLatest(increaseItem, handleIncreaseItem)
   // yield takeLatest('cart/addItem')
   // yield takeLatest('cart/decreaseItem')
 }

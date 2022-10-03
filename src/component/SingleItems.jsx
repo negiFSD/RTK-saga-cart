@@ -2,7 +2,7 @@ import React from "react";
 import { IoIosAddCircle } from "react-icons/io";
 import { AiFillMinusCircle } from "react-icons/ai";
 import { MdCancel } from "react-icons/md";
-import { increase,   removeItem, decreaseItem } from "../features/cartSlice";
+import {removeItem, decreaseItem, increaseItem } from "../features/cartSlice";
 import { useDispatch } from "react-redux";
 
 
@@ -28,7 +28,7 @@ const dispatch =  useDispatch()
             <AiFillMinusCircle fontSize="21px" onClick={()=>dispatch(decreaseItem({id:id, qty:qty}))} />
           </span>
           <span className="s-plus">
-            <IoIosAddCircle  fontSize="22px" onClick={()=>dispatch(increase(id))}/>
+            <IoIosAddCircle  fontSize="22px" onClick={()=>dispatch(increaseItem({id:id, qty:qty}))}/>
           </span>
           
         </div>

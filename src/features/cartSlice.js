@@ -36,12 +36,11 @@ const cartSlice = createSlice({
     },
 
     // to decrease item
-    decreaseItem: ()=>{
-      console.log('decrease item initiated')
-
+    decreaseItem: () => {
+      console.log("decrease item initiated");
     },
-    setDecreaseItem:(state, action)=>{
-      console.log('decreasing item')
+    setDecreaseItem: (state, action) => {
+      console.log("decreasing item");
       const cartItem = state.cart.find((item) => item.id === action.payload);
       if (cartItem.qty === 1) {
         state.cart = state.cart.filter((item) => item.id !== action.payload);
@@ -49,36 +48,25 @@ const cartSlice = createSlice({
       cartItem.total = cartItem.qty * cartItem.price;
     },
 
-    //
-    
-    
+    // to increase item
+    increaseItem: () => {
+      console.log("increase item initiated");
+    },
+    setIncreaseItem: (state, action) => {
+      console.log(action.payload);
 
-
+      const indexValue = state.cart.findIndex(
+        (item) => item.id === action.payload.id
+      );
+      console.log(indexValue);
+      state.cart[indexValue].qty =action.payload.qty;
+      state.cart[indexValue].total=action.payload.qty*action.payload.price 
+    },
 
     //-------------local actions--------------
-    testactionOne:(state, action)=>{
-      console.log(action.payload)
-      
-    },
 
     clearCart: (state) => {
       state.cart = [];
-    },
-    increase: (state, action) => {
-      const cartItem = state.cart.find((item) => item.id === action.payload);
-      // console.log(JSON.parse(JSON.stringify(cartItem)))
-      cartItem.qty = cartItem.qty + 1;
-      cartItem.total = cartItem.price * cartItem.qty;
-    },
-    decrease: (state, action) => {
-      const cartItem = state.cart.find((item) => item.id === action.payload);
-      if (cartItem.qty === 1) {
-        state.cart = state.cart.filter((item) => item.id !== action.payload);
-      } else cartItem.qty = cartItem.qty - 1;
-      cartItem.total = cartItem.qty * cartItem.price;
-    },
-    remove: (state, action) => {
-      state.cart = state.cart.filter((item) => item.id !== action.payload);
     },
     calculateTotals: (state) => {
       state.totalProduct = state.cart.length;
@@ -96,9 +84,9 @@ const cartSlice = createSlice({
 
 export const {
   clearCart,
-  increase,
-  decrease,
-  remove,
+  // increase,
+  // decrease,
+  // remove,
   calculateTotals,
   fetchData,
   setFetchData,
@@ -107,6 +95,9 @@ export const {
   setRemoveItem,
   decreaseItem,
   setDecreaseItem,
-  testactionOne
+  testactionOne,
+  testActionTwo,
+  increaseItem,
+  setIncreaseItem,
 } = cartSlice.actions;
 export default cartSlice.reducer;

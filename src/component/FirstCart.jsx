@@ -2,8 +2,7 @@ import React, { useEffect } from "react";
 import SingleItems from "./SingleItems";
 // import cartItems from "../cartItem";
 import { useDispatch, useSelector } from "react-redux";
-import { calculateTotals, clearCart, fetchData, testactionOne, } from "../features/cartSlice";
-
+import { calculateTotals, clearCart, fetchData, } from "../features/cartSlice";
 function FirstCart() {
  const cartItems =  useSelector((store)=>store.cart)
  const{totalProduct, totalCartItems, totalAmount} = useSelector((store)=>store.cart)
@@ -39,7 +38,11 @@ useEffect(()=>{
         {cartItems.cart.length>0 && <button className="f-button" onClick={()=>dispatch(clearCart())}>Clear Cart</button>}
           {/* <button onClick={()=>(dispatch(fetchData()))}>fetch item</button>
           // <button onClick={()=>(dispatch(removeItem('3333')))}>delete item</button> */}
-          <button onClick={()=>dispatch(testactionOne(cartItems.error))}>sdff</button>
+          {/* <button onClick={()=>{
+          dispatch(testactionOne(cartItems.error))
+          dispatch(testActionTwo(cartItems.error))
+        }
+          }>sdff</button> */}
 
 
       </div>
