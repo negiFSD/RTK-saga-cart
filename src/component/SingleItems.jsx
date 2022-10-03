@@ -25,7 +25,7 @@ const dispatch =  useDispatch()
         {qty}
         <div>
         <span className="s-minus">
-            <AiFillMinusCircle fontSize="21px" onClick={()=>dispatch(decreaseItem({id:id, qty:qty, price:price, total:total}))} />
+            <AiFillMinusCircle fontSize="21px" onClick={()=>dispatch(decreaseItem({id:id, qty:qty}))} />
           </span>
           <span className="s-plus">
             <IoIosAddCircle  fontSize="22px" onClick={()=>dispatch(increase(id))}/>

@@ -1,80 +1,82 @@
-import axios from 'axios';
-import {takeLatest, put, call} from 'redux-saga/effects'
-import {    decreaseItem, removeItem, setDecreaseItem, setFetchData, setRemoveItem } from '../cartSlice';
+import axios from "axios";
+import { takeLatest, put, call } from "redux-saga/effects";
+import {
+  decreaseItem,
+  removeItem,
+  setDecreaseItem,
+  setFetchData,
+  setRemoveItem,
+} from "../cartSlice";
 
-function* handleFetchData(){
-    const usersFetch = async()=>{
-      const res =await axios('http://localhost:3004/cart');
-      return res.data
+//------------------- fetch item for the first time-----------------------
+
+function* handleFetchData() {
+  const usersFetch = async () => {
+    const res = await axios("http://localhost:3004/cart");
+    return res.data;
+  };
+  try {
+    const data = yield call(usersFetch);
+    yield put(setFetchData(data));
+  } catch (error) {
+    console.log("something went wrong while fetching data", error.message);
   }
-    try{
-      const data = yield call(usersFetch);
-      yield put (setFetchData(data))
-    }
-    catch(error){
-     console.log('something went wrong while fetching data')
-    }
-  } 
-
-
-function* handleRemoveData(action){
-  const removeItemFunc = async()=>{
-    // console.log(value)
-    const res =await axios.delete(`http://localhost:3004/cart/${action.payload}`);
-    return res.data
 }
-  try{
+
+//------------------------ deleting items ------------------------------------
+
+function* handleRemoveData(action) {
+  const removeItemFunc = async () => {
+    const res = await axios.delete(
+      `http://localhost:3004/cart/${action.payload}`
+    );
+    return res.data;
+  };
+  try {
     yield call(removeItemFunc);
-    yield put (setRemoveItem(action.payload))
+    yield put(setRemoveItem(action.payload));
+  } catch (error) {
+    console.log("something went wrong while deleting data");
   }
-  catch(error){
-   console.log('something went wrong while deleting data')
+}
+
+// ------------------------Decreasing items -------------------------------------
+
+function* handleDecreaseItem(action) {
+  const decreaseFunc = async () => {
+    if (action.payload.qty < 2) {
+      const res = await axios.delete(
+        `http://localhost:3004/cart/${action.payload.id}`
+      );
+      console.log(res);
+      return res.data;
+    } else {
+      const payload = { qty: action.payload.qty -1};
+      console.log("making decrease request");
+      const res = await axios.patch(
+        `http://localhost:3004/cart/${action.payload.id}`,
+        payload
+      );
+      return res.data;
+    }
+  };
+  try {
+    yield put(setDecreaseItem(action.payload.id));
+    yield call(decreaseFunc);
+  } catch (error) {
+    console.log("something went wrong while decreasing item", error);
   }
 }
 
 
-function* handleDeleteItem (action){
-console.log(action.payload)
-  const decreaseFunc = async()=>{
-    
-    // return res.data
+//-----------------------------saga watcher function-------------------------------
 
-  //  const res =  await axios.delete(`http://localhost:3004/cart/${action.payload.id}`)
-  //   console.log(res)
-
-
-  if(action.payload.qty<2){
-    // const res =await axios.patch(`http://localhost:3004/cart/${action.payload.id}`,{"price":action.payload.price, "qty": action.paload.qty});
-    // return res.data
-
-    const res =await axios.delete(`http://localhost:3004/cart/${action.payload.id}`);
-    console.log(res)
-    return res.data
-  }
-  else{
-    const payload = { "qty": action.payload.qty}
-    const res =await axios.patch(`http://localhost:3004/cart/${action.payload.id}`,payload);
-    console.log(payload)
-    console.log(res)
-    
-  }
-
+function* watcherSaga() {
+  yield takeLatest("cart/fetchData", handleFetchData);
+  yield takeLatest(removeItem, handleRemoveData);
+  yield takeLatest(decreaseItem, handleDecreaseItem);
+  // yield takeLatest('cart/addItem')
+  // yield takeLatest('cart/decreaseItem')
 }
-try{
-  yield call(decreaseFunc);
-  yield put (setDecreaseItem(action.payload.id))
-}
-catch(error){
- console.log('something went wrong while decreasing item',error)
-}}
 
-function* watcherSaga(){
-    yield takeLatest('cart/fetchData', handleFetchData)
-    yield takeLatest(removeItem, handleRemoveData )
-    yield takeLatest(decreaseItem, handleDeleteItem )
-      // yield takeLatest('cart/addItem')      
-      // yield takeLatest('cart/decreaseItem')
-      
-  }
-  
-  export default watcherSaga
+export default watcherSaga;
