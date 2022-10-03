@@ -99,8 +99,6 @@ function* watcherSaga() {
   yield takeLatest(removeItem, handleRemoveData);
   yield takeLatest(decreaseItem, handleDecreaseItem);
   yield takeLatest(increaseItem, handleIncreaseItem)
-  // yield takeLatest('cart/addItem')
-  // yield takeLatest('cart/decreaseItem')
 }
 
 export default watcherSaga;

@@ -47,5 +47,4 @@ const dispatch =  useDispatch()
     </div>
   );
 }
-// color="#868483"
 export default SingleItems;

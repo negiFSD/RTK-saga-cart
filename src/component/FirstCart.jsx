@@ -17,7 +17,6 @@ useEffect(()=>{
  
  return (
    <div className="firstcart-container">
-   {/* {cartItems.cart[0].total ===undefined ?  console.log(cartItems.cart[0].price):console.log(cartItems.cart[0].total) } */}
       <div className="f-cart-items">
         {" "}
         <div className="f-titles">Cart Items</div>
@@ -36,13 +35,7 @@ useEffect(()=>{
         ))}
         {cartItems.cart.length<1 && <div> No Item in the cart</div>}
         {cartItems.cart.length>0 && <button className="f-button" onClick={()=>dispatch(clearCart())}>Clear Cart</button>}
-          {/* <button onClick={()=>(dispatch(fetchData()))}>fetch item</button>
-          // <button onClick={()=>(dispatch(removeItem('3333')))}>delete item</button> */}
-          {/* <button onClick={()=>{
-          dispatch(testactionOne(cartItems.error))
-          dispatch(testActionTwo(cartItems.error))
-        }
-          }>sdff</button> */}
+         
 
 
       </div>

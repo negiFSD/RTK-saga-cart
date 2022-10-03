@@ -84,9 +84,6 @@ const cartSlice = createSlice({
 
 export const {
   clearCart,
-  // increase,
-  // decrease,
-  // remove,
   calculateTotals,
   fetchData,
   setFetchData,
