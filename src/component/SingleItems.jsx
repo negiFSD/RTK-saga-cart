@@ -6,7 +6,7 @@ import {removeItem, decreaseItem, increaseItem } from "../features/cartSlice";
 import { useDispatch } from "react-redux";
 
 
-function SingleItems({title,price, total, img,qty, id, totalDisplayValue}) {
+function SingleItems({title, img,qty, id, totalDisplayValue}) {
 const dispatch =  useDispatch()
 // console.log(totalDisplayValue)
   return (
@@ -43,6 +43,7 @@ const dispatch =  useDispatch()
       
       <span className="s-cancel">
         <MdCancel fontSize="22px" onClick={()=>dispatch(removeItem(id))} />
+         {/* onClick={()=>dispatch(removeItem(id))} */}
       </span>
     </div>
   );

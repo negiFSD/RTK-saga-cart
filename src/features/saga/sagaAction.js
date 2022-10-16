@@ -10,6 +10,8 @@ import {
   setRemoveItem,
 } from "../cartSlice";
 
+
+
 //------------------- fetch item for the first time-----------------------
 
 function* handleFetchData() {
@@ -51,7 +53,7 @@ function* handleDecreaseItem(action) {
         `http://localhost:3004/cart/${action.payload.id}`
       );
       console.log(res);
-      return res.data;
+      // return res.data;
     } else {
       const payload = { qty: action.payload.qty -1};
       console.log("making decrease request");
@@ -59,7 +61,8 @@ function* handleDecreaseItem(action) {
         `http://localhost:3004/cart/${action.payload.id}`,
         payload
         );
-        return res.data;
+        // return res.data;
+        console.log(res.data)
       }
     };
     try {
@@ -73,8 +76,6 @@ function* handleDecreaseItem(action) {
 // ------------------------Increasing items -------------------------------------
 function* handleIncreaseItem(action){
   const increaseFunc = async () => {
-
-    console.log(action.payload.qty)
     const payload = { qty: action.payload.qty +1};
     const res = await axios.patch(
       `http://localhost:3004/cart/${action.payload.id}`,
@@ -84,7 +85,6 @@ function* handleIncreaseItem(action){
   };
   try {
     const data = yield call(increaseFunc);
-    console.log(data)
     yield put(setIncreaseItem(data));
 
   } catch (error) {
@@ -92,7 +92,7 @@ function* handleIncreaseItem(action){
   }
 }
 
-//-----------------------------saga watcher function-------------------------------
+//-------------------------saga watcher function-------------------------------
 
 function* watcherSaga() {
   yield takeLatest("cart/fetchData", handleFetchData);

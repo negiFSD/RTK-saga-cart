@@ -1,9 +1,9 @@
+
+
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   cart: [],
-  testCart: [],
-  error: 2,
   totalProduct: 0,
   totalCartItems: 0,
   totalAmount: 0,
@@ -17,6 +17,8 @@ const cartSlice = createSlice({
     //-------------saga actions--------------
 
     // to fetch items
+
+
     fetchData: (state) => {
       state.loading = true;
     },
@@ -45,7 +47,7 @@ const cartSlice = createSlice({
       if (cartItem.qty === 1) {
         state.cart = state.cart.filter((item) => item.id !== action.payload);
       } else cartItem.qty = cartItem.qty - 1;
-      cartItem.total = cartItem.qty * cartItem.price;
+       cartItem.total = cartItem.qty * cartItem.price;
     },
 
     // to increase item
@@ -53,12 +55,9 @@ const cartSlice = createSlice({
       console.log("increase item initiated");
     },
     setIncreaseItem: (state, action) => {
-      console.log(action.payload);
-
       const indexValue = state.cart.findIndex(
         (item) => item.id === action.payload.id
       );
-      console.log(indexValue);
       state.cart[indexValue].qty =action.payload.qty;
       state.cart[indexValue].total=action.payload.qty*action.payload.price 
     },
@@ -76,6 +75,7 @@ const cartSlice = createSlice({
         items += item.qty;
         amounts += item.qty * item.price;
       });
+
       state.totalCartItems = items;
       state.totalAmount = amounts;
     },
@@ -97,4 +97,5 @@ export const {
   increaseItem,
   setIncreaseItem,
 } = cartSlice.actions;
+
 export default cartSlice.reducer;
